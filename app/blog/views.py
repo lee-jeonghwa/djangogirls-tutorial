@@ -2,10 +2,37 @@
 # import os
 # from django.utils import timezone
 # from django.template import loader
-import random
+# import random
 from django.shortcuts import render
+from .models import Post
 
 def post_list(request):
+    posts = Post.objects.order_by('-created_date')
+
+    post_title = '<ul>'
+    for post in posts:
+        post_title += f'<li>{post.title}</li>'
+
+    post_title += '</ul>'
+
+    ##lecture
+    # content = (
+    #     '<ul>'
+    #     '{}'
+    #     '</ul>'
+    # )
+
+    context = {
+        'posts': post_title,
+    }
+    return render(
+        request=request,
+        template_name='blog/post_list.html',
+        context=context
+    )
+
+
+
     #템플릿을 가져옴 (단순 문자열이 아님)
     # template = loader.get_template('blog/post_list.html')
     # # 해당 템플릿을 렌더링
@@ -15,19 +42,19 @@ def post_list(request):
     # }
     # content = template.render(context, request)
     # return HttpResponse(content)
-    context ={
-        'name': random.choice(['이정화', '박영수']),
-    }
-    # render 함수 알아보기 !!  위의 것과 같은 결과를 보여줌
-    # loader.get_template
-    # template.render
-    # HttpResponse(content)
-    # 위 3가지를 한번에 해주는 역할
-    return render(
-        request=request,
-        template_name='blog/post_list.html',
-        context=context
-    )
+    # context ={
+    #     'name': random.choice(['이정화', '박영수']),
+    # }
+    # # render 함수 알아보기 !!  위의 것과 같은 결과를 보여줌
+    # # loader.get_template
+    # # template.render
+    # # HttpResponse(content)
+    # # 위 3가지를 한번에 해주는 역할
+    # return render(
+    #     request=request,
+    #     template_name='blog/post_list.html',
+    #     context=context
+    # )
 
 
 
