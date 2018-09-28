@@ -9,21 +9,13 @@ from .models import Post
 def post_list(request):
     posts = Post.objects.order_by('-created_date')
 
-    post_title = '<ul>'
-    for post in posts:
-        post_title += f'<li>{post.title}</li>'
-
-    post_title += '</ul>'
-
-    ##lecture
-    # content = (
-    #     '<ul>'
-    #     '{}'
-    #     '</ul>'
-    # )
+    # post_title = '<ul>'
+    # for post in posts:
+    #     post_title += f'<li>{post.title}</li>'
+    # post_title += '</ul>'
 
     context = {
-        'posts': post_title,
+        'posts': posts,
     }
     return render(
         request=request,
