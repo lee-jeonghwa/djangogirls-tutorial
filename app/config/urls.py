@@ -19,5 +19,9 @@ from blog import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.post_list)
+    url(r'^$', views.post_list),
+    # 글을 보기위한 링크 만들기 위해
+    url(r'^posts/(?P<pk>\d+)/$', views.post_detail),
+    # request가 오면
+    # post_deatai(request= request, pk = <그룹부분에 주어진 값>
 ]
